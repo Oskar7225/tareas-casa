@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tareas de la casa · Nov 2026 – Ene 2027</title>
+<style>
+:root{--bg:#f4f5fa;--ink:#1d2433;--muted:#6b7385;--line:#e3e6ee;--sab:#fff0b8;--dom:#ffd3d3;--fest:#e0d0ff;--fest-ink:#5b2fb8}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;padding-bottom:24px}
+header{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:18px 16px 14px}
+header h1{margin:0;font-size:21px}
+header p{margin:4px 0 0;font-size:13px;opacity:.9}
+nav.tabs{display:flex;position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+nav.tabs button{flex:1;padding:13px 4px;border:0;background:none;font-size:14px;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer}
+nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:#7c3aed}
+main{padding:12px;max-width:640px;margin:0 auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;margin:0 2px 12px;color:var(--muted)}
+.sw{display:inline-block;width:13px;height:13px;border-radius:4px;vertical-align:-2px;margin-right:5px;border:1px solid rgba(0,0,0,.08)}
+.card{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:12px}
+.list{padding:2px 12px}
+.daybar{display:flex;gap:8px;align-items:center}
+.daybar button{width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:24px;cursor:pointer;flex:none;color:var(--ink)}
+.daybar select{flex:1;min-width:0;height:46px;border-radius:12px;border:1px solid var(--line);font-size:16px;padding:0 8px;background:#fff;color:var(--ink)}
+.dayhead{border-radius:14px;padding:12px 14px;margin-bottom:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px}
+.dayhead.sab{background:var(--sab)}
+.dayhead.dom{background:var(--dom)}
+.dayhead.fest{background:var(--fest)}
+.dtitle{font-weight:700;font-size:16px}
+.badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#fff}
+.badge.fest{color:var(--fest-ink)}
+.task{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:0}
+.pic{border:0;background:none;padding:0;cursor:pointer;flex:none;line-height:0}
+.pic svg{border-radius:12px;display:block}
+.tinfo{flex:1;min-width:0}
+.tname{font-weight:700;font-size:15px}
+.tdesc{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.35}
+.chip{color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;flex:none;white-space:nowrap}
+.chip.libre{background:#c5cad6}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pbtn{border:2px solid var(--c);background:#fff;color:var(--c);border-radius:12px;padding:10px 0;font-weight:700;font-size:13px;cursor:pointer}
+.pbtn.on{background:var(--c);color:#fff}
+.months{display:flex;gap:6px;margin-top:10px}
+.mbtn{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 0;font-size:13px;cursor:pointer;color:var(--ink)}
+.mbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sumgrid{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;margin-top:4px}
+.sumgrid span{background:#f1f3f8;padding:5px 10px;border-radius:999px}
+.sumgrid b{font-weight:800}
+.grp{margin-bottom:10px}
+.gdate{font-weight:700;font-size:14px;padding:8px 10px;border-radius:10px;background:#f1f3f8;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:2px}
+.gdate.sab{background:var(--sab)}
+.gdate.dom{background:var(--dom)}
+.gdate.fest{background:var(--fest)}
+.ver{font-weight:400;font-size:12px;color:var(--muted)}
+.mini{display:flex;align-items:center;gap:10px;padding:4px 6px;font-size:14px;cursor:pointer}
+.mini svg{border-radius:10px;display:block;flex:none}
+.empty-msg{color:var(--muted);font-size:14px;padding:8px 0}
+.mhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.mhead h3{margin:0;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.grid.head span{text-align:center;font-size:11px;color:var(--muted);font-weight:700;padding-bottom:2px}
+.cell{aspect-ratio:1;border:0;border-radius:10px;background:#f1f3f8;font-size:14px;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;color:var(--ink);padding:0;font-family:inherit}
+.cell.sab{background:var(--sab)}
+.cell.dom{background:var(--dom)}
+.cell.fest{background:var(--fest);font-weight:700;color:var(--fest-ink)}
+.cell i{position:absolute;top:2px;right:4px;font-style:normal;font-size:10px;color:var(--fest-ink)}
+.cell.empty{background:none;cursor:default}
+.note{font-size:12px;color:var(--muted);margin:4px 2px 0}
+.lb{display:none;position:fixed;inset:0;background:rgba(15,20,35,.65);align-items:center;justify-content:center;padding:20px;z-index:10}
+.lb.show{display:flex}
+.lbcard{background:#fff;border-radius:18px;padding:18px;text-align:center;max-width:340px;width:100%}
+.lbpic{width:220px;height:220px;max-width:75vw;max-height:55vh;border-radius:16px}
+.lbcard .tname{font-size:18px;margin-top:10px}
+.lbcard .tdesc{font-size:14px;margin-top:6px}
+.lbcard small{display:block;margin-top:12px;color:var(--muted);font-size:12px}
+#svgdefs{position:absolute;width:0;height:0;overflow:hidden}
+</style>
+</head>
+<body>
+<svg id="svgdefs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ic-cocina" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#e3f0ff"/>
+      <path d="M50 12 V40 H64" fill="none" stroke="#4a6fa5" stroke-width="5" stroke-linecap="round"/>
+      <rect x="8" y="56" width="84" height="9" rx="3" fill="#8aa3bd"/>
+      <path d="M22 65 H78 V70 A18 18 0 0 1 60 88 H40 A18 18 0 0 1 22 70 Z" fill="#b9d3ee" stroke="#4a6fa5" stroke-width="3"/>
+      <circle cx="36" cy="76" r="4" fill="#fff"/><circle cx="50" cy="72" r="3" fill="#fff"/><circle cx="62" cy="79" r="4" fill="#fff"/>
+    </symbol>
+    <symbol id="ic-colar" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#f3ead8"/>
+      <rect x="12" y="56" width="76" height="28" rx="6" fill="#d8b77a" stroke="#8a6d3b" stroke-width="2.5"/>
+      <circle cx="30" cy="66" r="5" fill="#fff"/><circle cx="48" cy="70" r="4" fill="#fff"/><circle cx="66" cy="64" r="5" fill="#fff"/>
+      <line x1="66" y1="12" x2="48" y2="44" stroke="#555" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="42" cy="48" rx="13" ry="8" transform="rotate(-35 42 48)" fill="#9aa0a6"/>
+      <circle cx="38" cy="45" r="1.8" fill="#f3ead8"/><circle cx="45" cy="50" r="1.8" fill="#f3ead8"/><circle cx="41" cy="52" r="1.8" fill="#f3ead8"/>
+    </symbol>
+    <symbol id="ic-gatos" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#fff0e0"/>
+      <path d="M26 46 L28 20 L46 34 Z" fill="#f2a65a"/>
+      <path d="M74 46 L72 20 L54 34 Z" fill="#f2a65a"/>
+      <ellipse cx="50" cy="58" rx="26" ry="22" fill="#f2a65a"/>
+      <circle cx="41" cy="55" r="3" fill="#333"/><circle cx="59" cy="55" r="3" fill="#333"/>
+      <path d="M46 64 H54 L50 68 Z" fill="#d9534f"/>
+      <path d="M28 64 H14 M28 69 L14 72 M72 64 H86 M72 69 L86 72" stroke="#333" stroke-width="1.5"/>
+      <path d="M14 14 L16 20 L22 22 L16 24 L14 30 L12 24 L6 22 L12 20 Z" fill="#ffd23f"/>
+      <path d="M82 76 L84 82 L90 84 L84 86 L82 92 L80 86 L74 84 L80 82 Z" fill="#ffd23f"/>
+    </symbol>
+    <symbol id="ic-perro-manana" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#e6f7ff"/>
+      <circle cx="82" cy="18" r="9" fill="#ffd23f"/>
+      <path d="M28 48 Q18 40 22 28" fill="none" stroke="#c08a4d" stroke-width="5" stroke-linecap="round"/>
+      <rect x="30" y="50" width="40" height="20" rx="9" fill="#c08a4d"/>
+      <rect x="34" y="64" width="5" height="16" rx="2" fill="#c08a4d"/>
+      <rect x="60" y="64" width="5" height="16" rx="2" fill="#c08a4d"/>
+      <circle cx="72" cy="42" r="12" fill="#c08a4d"/>
+      <ellipse cx="66" cy="32" rx="4" ry="8" fill="#7a5230" transform="rotate(20 66 32)"/>
+      <circle cx="76" cy="40" r="2.2" fill="#222"/>
+      <circle cx="84" cy="45" r="2.8" fill="#222"/>
+      <path d="M68 54 Q44 36 22 60" fill="none" stroke="#e4572e" stroke-width="2.5"/>
+      <circle cx="20" cy="62" r="4" fill="none" stroke="#e4572e" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="ic-perro-tarde" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#fde7d9"/>
+      <circle cx="18" cy="22" r="9" fill="#ff9f43"/>
+      <path d="M28 48 Q18 40 22 28" fill="none" stroke="#c08a4d" stroke-width="5" stroke-linecap="round"/>
+      <rect x="30" y="50" width="40" height="20" rx="9" fill="#c08a4d"/>
+      <rect x="34" y="64" width="5" height="16" rx="2" fill="#c08a4d"/>
+      <rect x="60" y="64" width="5" height="16" rx="2" fill="#c08a4d"/>
+      <circle cx="72" cy="42" r="12" fill="#c08a4d"/>
+      <ellipse cx="66" cy="32" rx="4" ry="8" fill="#7a5230" transform="rotate(20 66 32)"/>
+      <circle cx="76" cy="40" r="2.2" fill="#222"/>
+      <circle cx="84" cy="45" r="2.8" fill="#222"/>
+      <path d="M68 54 Q44 36 22 60" fill="none" stroke="#e4572e" stroke-width="2.5"/>
+      <circle cx="20" cy="62" r="4" fill="none" stroke="#e4572e" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="ic-barrer" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#f1ece4"/>
+      <rect x="0" y="86" width="100" height="14" fill="#d7c6a8"/>
+      <line x1="72" y1="8" x2="46" y2="60" stroke="#8b5e34" stroke-width="4" stroke-linecap="round"/>
+      <path d="M34 60 H62 L68 84 H28 Z" fill="#e0b84f"/>
+      <path d="M36 66 V84 M44 66 V84 M52 66 V84 M60 66 V84" stroke="#b7892b" stroke-width="2"/>
+      <ellipse cx="18" cy="80" rx="12" ry="5" fill="#bdbdbd"/>
+      <circle cx="12" cy="76" r="2" fill="#9e9e9e"/><circle cx="26" cy="74" r="2" fill="#9e9e9e"/>
+    </symbol>
+    <symbol id="ic-bano-orden" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#e8fbf5"/>
+      <rect x="10" y="20" width="80" height="5" rx="2.5" fill="#9aa5b1"/>
+      <rect x="24" y="27" width="20" height="54" rx="2" fill="#6fc3df"/>
+      <rect x="24" y="66" width="20" height="5" fill="#ffffff"/>
+      <rect x="56" y="27" width="20" height="54" rx="2" fill="#f7a8b8"/>
+      <rect x="56" y="66" width="20" height="5" fill="#ffffff"/>
+    </symbol>
+    <symbol id="ic-sala" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="16" fill="#eef8ee"/>
+      <rect x="16" y="30" width="68" height="30" rx="10" fill="#8fb996"/>
+      <rect x="8" y="42" width="12" height="34" rx="6" fill="#6f9d78"/>
+      <rect x="80" y="42" width="12" height="34" rx="6" fill="#6f9d78"/>
+      <rect x="20" y="56" width="60" height="18" rx="4" fill="#a6cba9"/>
+      <rect x="24" y="40" width="22" height="18" rx="6" fill="#f4d35e"/>
+      <rect x="54" y="40" width="22" height="18" rx="6" fill="#f4d35e"/>
+      <rect x="22" y="74" width="5" height="8" fill="#5a4632"/>
+      <rect x="73" y="74" width="5" height="8" fill="#5a4632"/>
+      <path d="M86 14 L88 20 L94 22 L88 24 L86 30 L84 24 L78 22 L84 20 Z" fill="#ffd23f"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <h1>🏠 Tareas de la casa</h1>
+  <p>Noviembre 2026 · Diciembre 2026 · Enero 2027</p>
+</header>
+
+<nav class="tabs" aria-label="Vistas">
+  <button id="t-dia" onclick="setTab('dia')">📅 Por día</button>
+  <button id="t-persona" onclick="setTab('persona')">👤 Por persona</button>
+  <button id="t-cal" onclick="setTab('cal')">🗓️ Calendario</button>
+</nav>
+
+<main>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--sab)"></i>Sábado</span>
+    <span><i class="sw" style="background:var(--dom)"></i>Domingo</span>
+    <span><i class="sw" style="background:var(--fest)"></i>★ Festivo</span>
+  </div>
+  <div id="view"></div>
+  <p class="note">Toca la imagen de cualquier tarea para verla más grande.</p>
+</main>
+
+<div id="lb" class="lb" onclick="this.classList.remove('show')">
+  <div class="lbcard">
+    <svg viewBox="0 0 100 100" class="lbpic" aria-hidden="true"><use id="lbuse" href="#ic-cocina" width="100" height="100"/></svg>
+    <div id="lbname" class="tname"></div>
+    <div id="lbdesc" class="tdesc"></div>
+    <small>Toca en cualquier lugar para cerrar</small>
+  </div>
+</div>
+
+<script>
+const DATA = [{"d":"2026-11-01","a":["GABY","NO","MALEJA","OSCAR","DANNA","DANNA","NO","MALEJA"]},{"d":"2026-11-02","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-03","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-04","a":["DANNA","NO","DANNA","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-05","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-06","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-07","a":["OSCAR","NO","NO","MALEJA","DANNA","NO","NO","NO"]},{"d":"2026-11-08","a":["GABY","NO","MALEJA","MALEJA","OSCAR","DANNA","NO","DANNA"]},{"d":"2026-11-09","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-10","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-11","a":["MALEJA","NO","DANNA","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-12","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-13","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-14","a":["OSCAR","NO","NO","DANNA","MALEJA","NO","NO","NO"]},{"d":"2026-11-15","a":["GABY","NO","MALEJA","OSCAR","DANNA","DANNA","NO","MALEJA"]},{"d":"2026-11-16","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-17","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-18","a":["DANNA","NO","DANNA","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-19","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-20","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-21","a":["OSCAR","NO","NO","MALEJA","DANNA","NO","NO","NO"]},{"d":"2026-11-22","a":["GABY","NO","MALEJA","MALEJA","OSCAR","DANNA","NO","DANNA"]},{"d":"2026-11-23","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-24","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-25","a":["MALEJA","NO","DANNA","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-26","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-11-27","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-11-28","a":["OSCAR","NO","NO","DANNA","MALEJA","NO","NO","NO"]},{"d":"2026-11-29","a":["GABY","NO","MALEJA","OSCAR","DANNA","DANNA","NO","MALEJA"]},{"d":"2026-11-30","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-01","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-02","a":["DANNA","NO","DANNA","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-03","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-04","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-05","a":["OSCAR","NO","NO","MALEJA","DANNA","NO","NO","NO"]},{"d":"2026-12-06","a":["GABY","NO","MALEJA","MALEJA","OSCAR","DANNA","NO","DANNA"]},{"d":"2026-12-07","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-08","a":["DANNA","MALEJA","NO","OSCAR","GABY","MALEJA","NO","DANNA"]},{"d":"2026-12-09","a":["MALEJA","NO","DANNA","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-10","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-11","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-12","a":["OSCAR","NO","NO","DANNA","MALEJA","NO","NO","NO"]},{"d":"2026-12-13","a":["GABY","NO","MALEJA","MALEJA","DANNA","DANNA","NO","MALEJA"]},{"d":"2026-12-14","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-15","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-16","a":["DANNA","NO","DANNA","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-17","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-18","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-19","a":["OSCAR","NO","NO","MALEJA","DANNA","NO","NO","NO"]},{"d":"2026-12-20","a":["GABY","NO","MALEJA","MALEJA","DANNA","DANNA","NO","DANNA"]},{"d":"2026-12-21","a":["MALEJA","DANNA","NO","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-22","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-23","a":["MALEJA","NO","DANNA","GABY","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-24","a":["DANNA","MALEJA","NO","OSCAR","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-25","a":["OSCAR","NO","NO","GABY","OSCAR","DANNA","NO","MALEJA"]},{"d":"2026-12-26","a":["OSCAR","NO","NO","DANNA","MALEJA","NO","NO","NO"]},{"d":"2026-12-27","a":["GABY","NO","MALEJA","MALEJA","DANNA","DANNA","NO","MALEJA"]},{"d":"2026-12-28","a":["DANNA","MALEJA","NO","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-29","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2026-12-30","a":["DANNA","NO","DANNA","GABY","MALEJA","MALEJA","DANNA","DANNA"]},{"d":"2026-12-31","a":["MALEJA","DANNA","NO","OSCAR","DANNA","DANNA","MALEJA","MALEJA"]},{"d":"2027-01-01","a":["OSCAR","NO","NO","GABY","OSCAR","MALEJA","NO","DANNA"]}];
+
+const TASKS = [
+  {label:'Cocina', icon:'cocina', desc:'Fregar, recoger y dejar la cocina limpia.'},
+  {label:'Colar arena', icon:'colar', desc:'Colar la arena del gato: sacar grumos y excrementos con la pala.'},
+  {label:'Aseo gatos', icon:'gatos', desc:'Limpiar el aseo y el arenero de los gatos.'},
+  {label:'Sacada perro mañana', icon:'perro-manana', desc:'Sacar al perro a pasear por la mañana.'},
+  {label:'Sacada perro tarde', icon:'perro-tarde', desc:'Sacar al perro a pasear por la tarde.'},
+  {label:'Barrer casa', icon:'barrer', desc:'Barrer los suelos de la casa.'},
+  {label:'Ordenada baño arriba', icon:'bano-orden', desc:'Ordenar el baño de arriba: toallas y encimera.'},
+  {label:'Sala', icon:'sala', desc:'Ordenar y limpiar la sala.'}
+];
+const PEOPLE = {GABY:'#e75480', DANNA:'#7b4fd1', MALEJA:'#0f9d8a', OSCAR:'#2f6fd6'};
+const HOLIDAYS = ['2026-12-08','2026-12-25','2027-01-01'];
+const MES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const DIAC = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const KIND_NAME = {fest:'★ Festivo', sab:'Sábado', dom:'Domingo'};
+
+const DAYS = DATA.map(x => {
+  const [y,m,d] = x.d.split('-').map(Number);
+  const wd = new Date(Date.UTC(y, m-1, d)).getUTCDay();
+  return {key:x.d, y, m, d, wd, hol: HOLIDAYS.includes(x.d), a: x.a};
+});
+
+function kind(x){ return x.hol ? 'fest' : x.wd === 6 ? 'sab' : x.wd === 0 ? 'dom' : 'lab'; }
+
+function startIdx(){
+  const n = new Date();
+  const k = n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+  const i = DAYS.findIndex(x => x.key === k);
+  if (i >= 0) return i;
+  return k < DAYS[0].key ? 0 : DAYS.length - 1;
+}
+
+const S = {tab:'dia', idx:startIdx(), person:'GABY', month:'all'};
+
+function chip(v){
+  return v === 'NO' ? '<span class="chip libre">Libre</span>'
+                    : '<span class="chip" style="background:'+PEOPLE[v]+'">'+v+'</span>';
+}
+function pic(i, size){
+  return '<svg viewBox="0 0 100 100" width="'+size+'" height="'+size+'" aria-hidden="true"><use href="#ic-'+TASKS[i].icon+'" width="100" height="100"/></svg>';
+}
+
+function setTab(t){ S.tab = t; render(); window.scrollTo(0,0); }
+function goDay(i){ S.idx = i; S.tab = 'dia'; render(); window.scrollTo(0,0); }
+function step(n){ S.idx = Math.min(DAYS.length-1, Math.max(0, S.idx + n)); render(); }
+function pick(v){ S.idx = +v; render(); }
+function setPerson(p){ S.person = p; render(); }
+function setMonth(m){ S.month = m; render(); }
+function zoom(i){
+  document.getElementById('lbuse').setAttribute('href', '#ic-'+TASKS[i].icon);
+  document.getElementById('lbname').textContent = TASKS[i].label;
+  document.getElementById('lbdesc').textContent = TASKS[i].desc;
+  document.getElementById('lb').classList.add('show');
+}
+
+function viewDia(){
+  const x = DAYS[S.idx], k = kind(x);
+  const opts = DAYS.map((y,i) => '<option value="'+i+'"'+(i===S.idx?' selected':'')+'>'+DIAC[y.wd]+' '+y.d+' '+MES[y.m-1].slice(0,3)+(y.hol?' ★':'')+'</option>').join('');
+  const rows = TASKS.map((t,i) =>
+    '<div class="task">'+
+      '<button class="pic" onclick="zoom('+i+')" aria-label="Ver imagen: '+t.label+'">'+pic(i,56)+'</button>'+
+      '<div class="tinfo"><div class="tname">'+t.label+'</div><div class="tdesc">'+t.desc+'</div></div>'+
+      chip(x.a[i]) +
+    '</div>').join('');
+  return '<div class="card"><div class="daybar">'+
+      '<button onclick="step(-1)" aria-label="Día anterior">‹</button>'+
+      '<select onchange="pick(this.value)" aria-label="Elegir día">'+opts+'</select>'+
+      '<button onclick="step(1)" aria-label="Día siguiente">›</button>'+
+    '</div></div>'+
+    '<div class="dayhead '+k+'"><div class="dtitle">'+DIA[x.wd]+', '+x.d+' de '+MES[x.m-1]+' de '+x.y+'</div>'+
+      (k==='lab' ? '' : '<span class="badge '+(k==='fest'?'fest':'')+'">'+KIND_NAME[k]+'</span>')+
+    '</div>'+
+    '<div class="card list">'+rows+'</div>';
+}
+
+function viewPersona(){
+  const names = Object.keys(PEOPLE);
+  const btns = names.map(n => '<button class="pbtn'+(n===S.person?' on':'')+'" style="--c:'+PEOPLE[n]+'" onclick="setPerson(\''+n+'\')">'+n+'</button>').join('');
+  const meses = [['all','Todo'],['11','Nov'],['12','Dic'],['1','Ene']];
+  const mb = meses.map(([v,l]) => '<button class="mbtn'+(String(S.month)===v?' on':'')+'" onclick="setMonth(\''+v+'\')">'+l+'</button>').join('');
+  let total = 0; const counts = TASKS.map(() => 0); let groups = '';
+  DAYS.forEach((x,i) => {
+    if (S.month !== 'all' && String(x.m) !== S.month) return;
+    const items = TASKS.map((t,j) => ({t,j})).filter(o => x.a[o.j] === S.person);
+    if (!items.length) return;
+    items.forEach(o => { counts[o.j]++; total++; });
+    groups += '<div class="grp"><div class="gdate '+kind(x)+'" onclick="goDay('+i+')"><span>'+DIAC[x.wd]+' '+x.d+' '+MES[x.m-1].slice(0,3)+(x.hol?' ★':'')+'</span><span class="ver">ver día ›</span></div>'+
+      items.map(o => '<div class="mini" onclick="zoom('+o.j+')">'+pic(o.j,40)+'<span>'+o.t.label+'</span></div>').join('')+
+    '</div>';
+  });
+  const resumen = TASKS.map((t,j) => counts[j] ? '<span><b>'+counts[j]+'</b> '+t.label+'</span>' : '').join('');
+  return '<div class="card"><div class="seg">'+btns+'</div><div class="months">'+mb+'</div></div>'+
+    '<div class="card"><div class="mhead"><h3>'+S.person+'</h3><span class="ver">'+total+' tareas</span></div>'+
+      (total ? '<div class="sumgrid">'+resumen+'</div>' : '<div class="empty-msg">Sin tareas asignadas en este periodo.</div>')+
+    '</div>'+
+    (total ? groups : '');
+}
+
+function viewCal(){
+  const months = [[2026,11],[2026,12],[2027,1]];
+  return months.map(([y,m]) => {
+    const first = (new Date(Date.UTC(y, m-1, 1)).getUTCDay() + 6) % 7;
+    let cells = '';
+    for (let b = 0; b < first; b++) cells += '<span class="cell empty"></span>';
+    DAYS.forEach((x,i) => {
+      if (x.y !== y || x.m !== m) return;
+      cells += '<button class="cell '+kind(x)+'" onclick="goDay('+i+')" aria-label="'+x.d+' de '+MES[m-1]+'">'+x.d+(x.hol?'<i>★</i>':'')+'</button>';
+    });
+    return '<div class="card"><div class="mhead"><h3>'+MES[m-1].charAt(0).toUpperCase()+MES[m-1].slice(1)+' '+y+'</h3></div>'+
+      '<div class="grid head">'+['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(d => '<span>'+d+'</span>').join('')+'</div>'+
+      '<div class="grid">'+cells+'</div></div>';
+  }).join('');
+}
+
+function render(){
+  ['dia','persona','cal'].forEach(t => document.getElementById('t-'+t).classList.toggle('on', S.tab === t));
+  const v = document.getElementById('view');
+  v.innerHTML = S.tab === 'dia' ? viewDia() : S.tab === 'persona' ? viewPersona() : viewCal();
+}
+render();
+</script>
+</body>
+</html>
